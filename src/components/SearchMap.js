@@ -14,8 +14,8 @@ const SearchMap = () => {
 
     const getCommunities = async () => {
         try {
-            const result = await LiferayApi('o/c/communities/');
-            setCommunities(result.data.items);
+            const result = await LiferayApi('/o/c/communities/');
+            setCommunities(result.items);
         } catch (error) {
             console.log(error.message);
         }
@@ -23,9 +23,9 @@ const SearchMap = () => {
 
     const getProvinces = async () => {
         try {
-            const result = await LiferayApi('o/c/provinces/');
-            setProvinces(result.data.items);
-            setSelectableProvinces(result.data.items.map((prov) => <option value={prov.id}>{prov.name}</option>));
+            const result = await LiferayApi('/o/c/provinces/');
+            setProvinces(result.items);
+            setSelectableProvinces(result.items.map((prov) => <option value={prov.id}>{prov.name}</option>));
         } catch (error) {
             console.log(error.message);
         }
@@ -41,8 +41,8 @@ const SearchMap = () => {
                     query = encodeURIComponent('r_communityPoint_c_communityId = ' + selectedLocation.id);
                 }
                 setLoadingPoints(true);
-                await LiferayApi('o/c/points/?search=' + query).then(res => {
-                    setPointsInMap(res.data.items);
+                await LiferayApi('/o/c/points/?search=' + query).then(res => {
+                    setPointsInMap(res.items);
                     setLoadingPoints(false);
                 });
             }
